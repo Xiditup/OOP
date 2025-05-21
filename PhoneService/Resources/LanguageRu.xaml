@@ -1,0 +1,109 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="ErrorText">Действие не выполнено</system:String>
+
+    <system:String x:Key="AddText">Добавить</system:String>
+    <system:String x:Key="SaveText">Сохранить</system:String>
+
+    <!--Страница авторизации-->
+    <system:String x:Key="HelloText">Добро пожаловать</system:String>
+    <system:String x:Key="LoginText">Логин:</system:String>
+    <system:String x:Key="PasswordText">Пароль:</system:String>
+    <system:String x:Key="AuthorizeText">Авторизоваться</system:String>
+    <system:String x:Key="ToRegisterText">Перейти к регистрации</system:String>
+    
+    <!--Страница регистрации-->
+    <system:String x:Key="RegistrationText">Регистрация</system:String>
+    <system:String x:Key="NameText">Имя:</system:String>
+    <system:String x:Key="PhoneText">Номер телефона:</system:String>
+    <system:String x:Key="EmailText">Email:</system:String>
+    <system:String x:Key="RegisterText">Зарегистрироваться</system:String>
+    <system:String x:Key="ToLoginText">Перейти к авторизации</system:String>
+    
+    <!--Навигационное меню-->
+    <system:String x:Key="RequestsText">Ваши заявки</system:String>
+    <system:String x:Key="RequestText">Создать заявку</system:String>
+    <system:String x:Key="StorageText">Склад</system:String>
+    <system:String x:Key="UsersText">Пользователи</system:String>
+    <system:String x:Key="ServicesText">Услуги</system:String>
+    <system:String x:Key="StocksText">Акции</system:String>
+    <system:String x:Key="ReviewsText">Отзывы</system:String>
+    <system:String x:Key="LogoutText">Выход</system:String>
+
+    <!--Страница склада-->
+    <system:String x:Key="QuantityText">Количество</system:String>
+
+    <!--Страница пользователей-->
+    <system:String x:Key="RoleText">Роль</system:String>
+    <system:String x:Key="NewPasswordText">Новый пароль</system:String>
+    <system:String x:Key="SearchNameText">Поиск по имени</system:String>
+    <system:String x:Key="SearchLoginText">Поиск по логину</system:String>
+    <system:String x:Key="EmployeesText">Сотрудники</system:String>
+    <system:String x:Key="ClientsText">Клиенты</system:String>
+    <system:String x:Key="IsEmployeeText">Является сотрудником</system:String>
+
+    <!--Страница услуг-->
+    <system:String x:Key="SearchCategoryText">Поиск по категории</system:String>
+    <system:String x:Key="CategoryText">Категория</system:String>
+    <system:String x:Key="PredPriceText">Предварительная цена (руб.)</system:String>
+    <system:String x:Key="ServiceNameText">Название услуги</system:String>
+    
+    <!--Страница акций-->
+    <system:String x:Key="DescriptionText">Описание</system:String>
+    <system:String x:Key="WithoutServiceText">Без услуги</system:String>
+    <system:String x:Key="ServiceText">Услуга</system:String>
+    <system:String x:Key="TypeText">Тип</system:String>
+    
+    <!--Страница создания заявки-->
+    <system:String x:Key="AddMainPhotoText">Добавить основное фото</system:String>
+    <system:String x:Key="AddPhotoText">Добавить фото</system:String>
+    <system:String x:Key="AllPhotosText">Все фото</system:String>
+    <system:String x:Key="SelectDeviceText">Устройство</system:String>
+    <system:String x:Key="ServiceCategoryText">Категория заявки</system:String>
+    <system:String x:Key="SelectServiceText">Выбор услуги</system:String>
+    <system:String x:Key="SendRequestText">Отправить заявку</system:String>
+    <system:String x:Key="PredPriceMiniText">Предварительная цена:</system:String>
+    <system:String x:Key="RubText">руб.</system:String>
+
+    <!--Фильтры-->
+    <system:String x:Key="FiltersText">Фильтры</system:String>
+    <system:String x:Key="ServiceStatusText">Статус заявки</system:String>
+    <system:String x:Key="ServiceTypeText">Вид услуги</system:String>
+    <system:String x:Key="OnlyActiveText">Только активные</system:String>
+    <system:String x:Key="WithoutMasterText">Без определённого мастера</system:String>
+    <system:String x:Key="WasCanceledText">Была отправлена заявка на отмену</system:String>
+    <system:String x:Key="ApplyText">Применить</system:String>
+    <system:String x:Key="ResetText">Сбросить</system:String>
+
+    <!--Страница заявок-->
+    <system:String x:Key="RequestsListText">Список заявок</system:String>
+
+    <!--Страница заявки-->
+    <system:String x:Key="RequestNameText">Название заявки</system:String>
+    <system:String x:Key="PriceText">Стоимость</system:String>
+    <system:String x:Key="OrderedText">Заказал</system:String>
+    <system:String x:Key="MakingText">Выполняет</system:String>
+    <system:String x:Key="TakeOrderText">Взять заказ</system:String>
+    <system:String x:Key="UsedDetailsText">Затраченные детали</system:String>
+    <system:String x:Key="TakeDetailText">Взять деталь со склада</system:String>
+    <system:String x:Key="TakeDetailButtonText">Взять деталь</system:String>
+    <system:String x:Key="DetailQuantityText">Количество детали</system:String>
+    <system:String x:Key="SetStatusText">Установить статус</system:String>
+    <system:String x:Key="SetPriceText">Установить цену (руб.)</system:String>
+    <system:String x:Key="CancelRequestText">Отменить заявку по просьбе клиента</system:String>
+    <system:String x:Key="AnswerText">Ответ</system:String>
+    
+    <!--Страница отзывов-->
+    <system:String x:Key="SendReviewText">Оставить отзыв</system:String>
+    <system:String x:Key="SelectRequestText">Заявка</system:String>
+    <system:String x:Key="MarkText">Оценка (0-5)</system:String>
+    <system:String x:Key="YourReviewText">Ваш отзыв</system:String>
+    <system:String x:Key="EditText">Изменить</system:String>
+    <system:String x:Key="DeleteText">Удалить</system:String>
+
+
+
+
+</ResourceDictionary>

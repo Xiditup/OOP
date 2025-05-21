@@ -1,0 +1,236 @@
+﻿<UserControl x:Class="PhoneService.Views.RequestsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PhoneService.Views"
+             xmlns:converters="clr-namespace:PhoneService.Converters"
+             xmlns:viewmodels="clr-namespace:PhoneService.ViewModels"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d"
+             d:DesignHeight="800"
+             d:DesignWidth="1200"
+             d:DataContext="{d:DesignInstance viewmodels:RequestsVM}"
+             d:Background="White">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Resources/LightTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="620" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Text="{DynamicResource RequestsListText}"
+                   d:Text="Список заявок"
+                   FontSize="30"
+                   FontWeight="Bold"
+                   Margin="10,0" />
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      Grid.RowSpan="2"
+                      Margin="0,40,0,0">
+            <ItemsControl ItemsSource="{Binding Requests}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"
+                                     VerticalAlignment="Top" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource CardStyle}"
+                                Background="{DynamicResource back}"
+                                MouseDown="Border_MouseDown">
+                            <StackPanel>
+                                <Border Style="{StaticResource ImageCardStyle}"
+                                        Height="200">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding ImagePathes, Converter={StaticResource MainPhotoConverter}}"
+                                                    Stretch="Fill" />
+                                    </Border.Background>
+                                </Border>
+                                <TextBlock Text="{Binding Name}"
+                                           Style="{StaticResource TitleTextStyle}" />
+                                <TextBlock Text="{Binding Device}"
+                                           Style="{StaticResource SubtitleTextStyle}" />
+                                <TextBlock Text="{Binding Status, Converter={StaticResource StatusConverter}}"
+                                           Style="{StaticResource SubtitleTextStyle}" />
+                                <Button Content="Отправить заявку на отмену"
+                                        Command="{Binding DataContext.Cancel, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                        CommandParameter="{Binding}">
+                                    <Button.Style>
+                                        <Style TargetType="Button"
+                                               BasedOn="{StaticResource ModernOutlinedButton}">
+                                            <Setter Property="Visibility"
+                                                    Value="{Binding DataContext.CanCancel, RelativeSource={RelativeSource AncestorType=ItemsControl}, Converter={StaticResource VisibilityConverter}}" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Status, Converter={StaticResource StatusConverter}}"
+                                                             Value="Отменён">
+                                                    <Setter Property="Visibility"
+                                                            Value="Collapsed" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Status, Converter={StaticResource StatusConverter}}"
+                                                             Value="Canceled">
+                                                    <Setter Property="Visibility"
+                                                            Value="Collapsed" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Status, Converter={StaticResource StatusConverter}}"
+                                                             Value="Закрыт">
+                                                    <Setter Property="Visibility"
+                                                            Value="Collapsed" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Status, Converter={StaticResource StatusConverter}}"
+                                                             Value="Closed">
+                                                    <Setter Property="Visibility"
+                                                            Value="Collapsed" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding CancelRequired}"
+                                                             Value="True">
+                                                    <Setter Property="Visibility"
+                                                            Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                <TextBlock Text="Заявку на отмену отправлена">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock"
+                                               BasedOn="{StaticResource SubtitleTextStyle}">
+                                            <Setter Property="Visibility"
+                                                    Value="Collapsed" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CancelRequired}"
+                                                             Value="True">
+                                                    <Setter Property="Visibility"
+                                                            Value="Visible" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Status, Converter={StaticResource StatusConverter}}"
+                                                             Value="Отменён">
+                                                    <Setter Property="Visibility"
+                                                            Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Border Grid.Column="1"
+                Background="{DynamicResource back}"
+                CornerRadius="10"
+                Padding="20"
+                Margin="10, 50, 10, 10"
+                VerticalAlignment="Top">
+            <Border.Effect>
+                <DropShadowEffect Color="Gray"
+                                  BlurRadius="10"
+                                  ShadowDepth="2"
+                                  Opacity="0.3" />
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock Text="{DynamicResource FiltersText}"
+                           d:Text="Фильтры"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20"
+                           FontSize="20" />
+                <TextBlock Text="{DynamicResource ServiceNameText}"
+                           d:Text="Имя заявки"
+                           FontSize="15"
+                           Margin="0,0,0,5" />
+                <TextBox Text="{Binding RequestName}"
+                         Margin="0,0,0,10" />
+                <TextBlock Text="{DynamicResource SelectDeviceText}"
+                           d:Text="Имя устройства"
+                           FontSize="15"
+                           Margin="0,0,0,5" />
+                <TextBox Text="{Binding DeviceName}"
+                         Margin="0,0,0,10" />
+                <TextBlock Text="{DynamicResource ServiceTypeText}"
+                           d:Text="Вид услуги"
+                           FontSize="15"
+                           Margin="0,0,0,5" />
+                <ComboBox ItemsSource="{Binding Services}"
+                          SelectedItem="{Binding SelectedService}"
+                          Style="{StaticResource ComboBoxFlatStyleBlock}"
+                          Margin="0,0,0,10" />
+                <TextBlock Text="{DynamicResource ServiceStatusText}"
+                           d:Text="Статус заявки"
+                           FontSize="15"
+                           Margin="0,0,0,5" />
+                <ComboBox ItemsSource="{Binding Statuses}"
+                          SelectedItem="{Binding SelectedStatus}"
+                          Style="{StaticResource ComboBoxFlatStyleBlock}"
+                          Margin="0,0,0,10">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource StatusConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <CheckBox IsChecked="{Binding OnlyActive}"
+                          Content="{DynamicResource OnlyActiveText}"
+                          d:Content="Только активные" />
+                <CheckBox IsChecked="{Binding OnlyWithoutMaster}"
+                          Content="{DynamicResource WithoutMasterText}"
+                          d:Content="Без определённого мастера" />
+                <CheckBox IsChecked="{Binding OnlyCancelRequired}"
+                          Content="{DynamicResource WasCanceledText}"
+                          d:Content="Была отправлена заявка на отмену" />
+                <Button Content="{DynamicResource ApplyText}"
+                        d:Content="Применить"
+                        Command="{Binding DoFilter}"
+                        Style="{StaticResource ModernButton}"
+                        Margin="0,10,0,0" />
+                <Button Content="{DynamicResource ResetText}"
+                        d:Content="Сбросить"
+                        Command="{Binding DoReset}"
+                        Style="{StaticResource ModernOutlinedButton}"
+                        Margin="0,10,0,0" />
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1"
+                Grid.Row="1"
+                Background="{DynamicResource back}"
+                CornerRadius="10"
+                Padding="20"
+                Height="150"
+                Margin="10">
+            <Border.Effect>
+                <DropShadowEffect Color="Gray"
+                                  BlurRadius="10"
+                                  ShadowDepth="2"
+                                  Opacity="0.3" />
+            </Border.Effect>
+            <StackPanel Orientation="Horizontal">
+                <Image Height="100"
+                       Width="100"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource ModernHighQualityImageStyle}"
+                       Source="{Binding UserAvatar}" />
+                <StackPanel Margin="10,5">
+                    <TextBlock FontSize="20"
+                               FontWeight="Bold"
+                               Text="{Binding UserName}" />
+                    <TextBlock FontSize="14"
+                               Foreground="Gray"
+                               FontWeight="Bold"
+                               Text="{Binding UserRole}" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

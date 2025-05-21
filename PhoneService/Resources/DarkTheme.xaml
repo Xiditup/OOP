@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Styles.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <LinearGradientBrush StartPoint="0,0"
+                         EndPoint="0,1"
+                         x:Key="background">
+        <GradientStop Color="#1F1F1F"
+                      Offset="0" />
+        <GradientStop Color="Black"
+                      Offset="1" />
+    </LinearGradientBrush>
+    <SolidColorBrush Color="#2F2F2F"
+                     x:Key="back" />
+    <SolidColorBrush x:Key="grid"
+                     Color="#2A2A2A" />
+    <SolidColorBrush x:Key="text"
+                     Color="White" />
+    <SolidColorBrush x:Key="textsemi"
+                     Color="#CFCFCF" />
+    <SolidColorBrush x:Key="textsemisemi"
+                     Color="#AFAFAF" />
+    <SolidColorBrush x:Key="hover"
+                     Color="#3F3F3F" />
+</ResourceDictionary>

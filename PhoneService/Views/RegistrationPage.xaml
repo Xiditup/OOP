@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="PhoneService.Views.RegistrationPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PhoneService.Views"
+             xmlns:viewmodels="clr-namespace:PhoneService.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d"
+             d:DesignHeight="900"
+             d:DesignWidth="1600"
+             d:Background="White"
+             d:DataContext="{d:DesignInstance viewmodels:AuthVM}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Border HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="{DynamicResource back}"
+                CornerRadius="10"
+                Padding="30"
+                Width="400">
+            <!-- Эффект тени для "поднятия" контейнера -->
+            <Border.Effect>
+                <DropShadowEffect Color="Gray"
+                                  BlurRadius="12"
+                                  ShadowDepth="4"
+                                  Opacity="0.3" />
+            </Border.Effect>
+
+            <StackPanel>
+                <TextBlock d:Text="Регистрация"
+                           Text="{DynamicResource RegistrationText}"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#007ACC"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20" />
+
+                <!-- Выбор аватара -->
+                <Border Style="{StaticResource ModernCircleBorderStyle}"
+                        MouseDown="Border_MouseDown"
+                        HorizontalAlignment="Center">
+                    <Image Source="{Binding AvatarBitmap}"
+                           Style="{StaticResource ModernHighQualityImageStyle}" />
+                </Border>
+
+                <!-- Поля ввода -->
+                <TextBlock Text="{DynamicResource LoginText}"
+                           d:Text="Логин:"
+                           Margin="0,10,0,5"
+                           FontSize="15" />
+                <TextBox Text="{Binding Login}"
+                         Margin="0,0,0,10"
+                         MaxLength="30" />
+
+                <TextBlock Text="{DynamicResource PasswordText}"
+                           d:Text="Пароль:"
+                           Margin="0,10,0,5"
+                           FontSize="15" />
+                <TextBox Text="{Binding Password}"
+                         Margin="0,0,0,10"
+                         MaxLength="30"
+                         FontFamily="pack://application:,,,/Resources/password.ttf#Password" />
+
+                <TextBlock Text="{DynamicResource NameText}"
+                           d:Text="Имя:"
+                           Margin="0,10,0,5"
+                           FontSize="15" />
+                <TextBox Text="{Binding Name}"
+                         Margin="0,0,0,10"
+                         MaxLength="50" />
+
+                <TextBlock Text="{DynamicResource PhoneText}"
+                           d:Text="Номер телефона:"
+                           Margin="0,10,0,5"
+                           FontSize="15" />
+                <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="0,0,0,10" />
+
+                <TextBlock Text="{DynamicResource EmailText}"
+                           d:Text="Email:"
+                           Margin="0,10,0,5"
+                           FontSize="15" />
+                <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="0,0,0,20"
+                         MaxLength="100" />
+
+                <!-- Кнопки -->
+                <Button Content="{DynamicResource RegisterText}"
+                        d:Content="Зарегистрироваться"
+                        Command="{Binding RegisterCommand}"
+                        Style="{StaticResource ModernButton}"
+                        Margin="0,10,0,5" />
+                <Button Content="{DynamicResource ToLoginText}"
+                        d:Content="Перейти к авторизации"
+                        Command="{Binding ToLogin}"
+                        Style="{StaticResource ModernOutlinedButton}"
+                        Margin="0,5,0,0" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

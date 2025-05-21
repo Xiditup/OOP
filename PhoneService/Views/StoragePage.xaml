@@ -1,0 +1,131 @@
+﻿<UserControl x:Class="PhoneService.Views.StoragePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PhoneService.Views"
+             xmlns:viewmodels="clr-namespace:PhoneService.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance viewmodels:StorageVM}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid d:Background="White">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Панель поиска -->
+        <StackPanel Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    Margin="10"
+                    VerticalAlignment="Center">
+            <TextBlock Text="{DynamicResource SearchNameText}"
+                       d:Text="Поиск по имени:"
+                       Margin="0,0,10,0"
+                       FontSize="16"
+                       VerticalAlignment="Center" />
+            <TextBox Width="200"
+                     TextChanged="TextBox_TextChanged"
+                     VerticalAlignment="Center" />
+        </StackPanel>
+
+        <DataGrid ItemsSource="{Binding Details}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  Grid.Row="1"
+                  Margin="10"
+                  HeadersVisibility="Column"
+                  AlternatingRowBackground="#F9F9F9"
+                  RowBackground="White"
+                  BeginningEdit="DataGrid_BeginningEdit"
+                  GridLinesVisibility="None">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID"
+                                    Binding="{Binding Id}"
+                                    IsReadOnly="True"
+                                    Width="Auto" />
+                <DataGridTextColumn Binding="{Binding Name}"
+                                    Width="2*">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="{DynamicResource NameText}"
+                                   d:Text="Имя" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Quantity}"
+                                    Width="2*">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="{DynamicResource QuantityText}"
+                                   d:Text="Количество" />
+                    </DataGridTextColumn.Header>
+                    <DataGridTextColumn.EditingElementStyle>
+                        <Style TargetType="TextBox">
+                            <EventSetter Event="TextChanged"
+                                         Handler="TextBox_TextChanged_1" />
+                        </Style>
+                    </DataGridTextColumn.EditingElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1"
+                    Grid.Column="1">
+            <Border Background="{DynamicResource back}"
+                    CornerRadius="10"
+                    Padding="20"
+                    Margin="10">
+                <Border.Effect>
+                    <DropShadowEffect Color="Gray"
+                                      BlurRadius="10"
+                                      ShadowDepth="2"
+                                      Opacity="0.3" />
+                </Border.Effect>
+                <StackPanel>
+                    <TextBlock Text="{DynamicResource NameText}"
+                               d:Text="Имя"
+                               FontSize="15"
+                               Margin="0,0,0,5" />
+                    <TextBox Text="{Binding Name}"
+                             Margin="0,0,0,10"
+                             MaxLength="100" />
+                    <TextBlock Text="{DynamicResource QuantityText}"
+                               d:Text="Количество"
+                               FontSize="15"
+                               Margin="0,0,0,5" />
+                    <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
+                             Margin="0,0,0,10" />
+                    <Button Content="{DynamicResource AddText}"
+                            d:Content="Добавить"
+                            Command="{Binding Create}"
+                            Style="{StaticResource ModernButton}"
+                            Margin="0,10,0,0" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <Button Content="{DynamicResource SaveText}"
+                d:Content="Сохранить"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Command="{Binding Save}"
+                Style="{StaticResource ModernButton}"
+                Margin="10"
+                Height="40"
+                Visibility="{Binding IsEditing, Converter={StaticResource VisibilityConverter}}" />
+    </Grid>
+</UserControl>

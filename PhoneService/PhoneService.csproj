@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Icons\catalog.jpg" />
+    <None Remove="Resources\Icons\cross.png" />
+    <None Remove="Resources\Icons\discount.png" />
+    <None Remove="Resources\Icons\employee.png" />
+    <None Remove="Resources\Icons\globe.png" />
+    <None Remove="Resources\Icons\home.png" />
+    <None Remove="Resources\Icons\Logout.png" />
+    <None Remove="Resources\Icons\plus.png" />
+    <None Remove="Resources\Icons\profile.png" />
+    <None Remove="Resources\Icons\review.png" />
+    <None Remove="Resources\Icons\service.png" />
+    <None Remove="Resources\Icons\theme.png" />
+    <None Remove="Resources\Icons\warehouse.png" />
+    <None Remove="Resources\password.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HamburgerMenu" Version="0.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
+    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+    <PackageReference Include="RoyWpf.Behaviors.MessengerSendAction" Version="0.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PhoneService.BLL\PhoneService.BLL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Icons\catalog.jpg" />
+    <Resource Include="Resources\Icons\cross.png" />
+    <Resource Include="Resources\Icons\discount.png" />
+    <Resource Include="Resources\Icons\employee.png" />
+    <Resource Include="Resources\Icons\globe.png" />
+    <Resource Include="Resources\Icons\home.png" />
+    <Resource Include="Resources\Icons\Logout.png" />
+    <Resource Include="Resources\Icons\plus.png" />
+    <Resource Include="Resources\Icons\profile.png" />
+    <Resource Include="Resources\Icons\review.png" />
+    <Resource Include="Resources\Icons\service.png" />
+    <Resource Include="Resources\Icons\theme.png" />
+    <Resource Include="Resources\Icons\warehouse.png" />
+    <Resource Include="Resources\password.ttf" />
+  </ItemGroup>
+
+</Project>

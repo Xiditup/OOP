@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_LastSelectedProfileId>C:\Users\kos5a\Desktop\PhoneService\PhoneService\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="Views\RequestsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AuthorizationPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\StockPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\UserPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MainPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RegistrationPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CreateRequestPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ReviewPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ServicesPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SingleRequest.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\StoragePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\DarkTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\LanguageEn.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\LanguageRu.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\LightTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Styles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\RequestsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AuthorizationPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\StockPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\UserPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MainPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CreateRequestPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ReviewPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ServicesPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SingleRequest.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\StoragePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,418 @@
+﻿<UserControl x:Class="PhoneService.Views.SingleRequestPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewmodels="clr-namespace:PhoneService.ViewModels"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d"
+             d:DesignHeight="800"
+             d:DesignWidth="1500"
+             d:DataContext="{d:DesignInstance viewmodels:SingleRequestVM}"
+             d:Background="White">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.7*" />
+            <RowDefinition Height="0.9*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3.1*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                d:Background="White"
+                Background="{DynamicResource back}"
+                CornerRadius="10"
+                Padding="20"
+                Margin="10">
+            <Border.Effect>
+                <DropShadowEffect Color="Gray"
+                                  BlurRadius="10"
+                                  ShadowDepth="2"
+                                  Opacity="0.3" />
+            </Border.Effect>
+            <StackPanel>
+                <Border BorderBrush="#007ACC"
+                        BorderThickness="2"
+                        Height="230">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding MainPhoto}"
+                                    Stretch="Fill" />
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="{DynamicResource AllPhotosText}"
+                           d:Text="Все фото"
+                           FontWeight="Bold"
+                           Margin="0,0,0,5" />
+                <ScrollViewer Height="220"
+                              VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Images}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="1" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="30,0,30,5">
+                                    <Border BorderBrush="#007ACC"
+                                            BorderThickness="2"
+                                            Height="190">
+                                        <Image Source="{Binding}"
+                                               Stretch="Fill" />
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="0"
+                Grid.Row="2"
+                d:Background="White"
+                Background="{DynamicResource back}"
+                CornerRadius="10"
+                Padding="20"
+                Margin="10">
+            <Border.Effect>
+                <DropShadowEffect Color="Gray"
+                                  BlurRadius="10"
+                                  ShadowDepth="2"
+                                  Opacity="0.3" />
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock Text="{DynamicResource UsedDetailsText}"
+                           d:Text="Затраченные детали"
+                           Style="{StaticResource TitleTextStyle}" />
+                <DataGrid IsReadOnly="True"
+                          ItemsSource="{Binding UsedDetails}"
+                          AutoGenerateColumns="False"
+                          HeadersVisibility="Column"
+                          AlternatingRowBackground="#F9F9F9"
+                          RowBackground="White"
+                          GridLinesVisibility="None"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          Height="180">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID"
+                                            Binding="{Binding Id}" />
+                        <DataGridTextColumn Width="2*"
+                                            Binding="{Binding Name}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource NameText}"
+                                           d:Text="Название" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Quantity}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource QuantityText}"
+                                           d:Text="Количество" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1"
+                Grid.Row="2"
+                Background="{DynamicResource back}"
+                CornerRadius="10"
+                Padding="20"
+                Margin="10"
+                Visibility="{Binding IsControlVisible, Converter={StaticResource AntiVisibilityConverter}}">
+            <Border.Effect>
+                <DropShadowEffect Color="Gray"
+                                  BlurRadius="10"
+                                  ShadowDepth="2"
+                                  Opacity="0.3" />
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock Text="Ответ от сервиса"
+                           Style="{StaticResource TitleTextStyle}" />
+                <TextBlock Text="{Binding Response}"
+                           Style="{StaticResource SubtitleTextStyle}"
+                           TextWrapping="Wrap" />
+
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1"
+                Grid.Row="2"
+                d:Background="White"
+                Background="{DynamicResource back}"
+                CornerRadius="10"
+                Padding="20"
+                Margin="10"
+                Visibility="{Binding IsControlVisible, Converter={StaticResource VisibilityConverter}}">
+            <Border.Effect>
+                <DropShadowEffect Color="Gray"
+                                  BlurRadius="10"
+                                  ShadowDepth="2"
+                                  Opacity="0.3" />
+            </Border.Effect>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Margin="0,0,20,0"
+                                Width="220">
+                        <TextBlock Text="{DynamicResource TakeDetailText}"
+                                   d:Text="Взять деталь со склада"
+                                   FontSize="20"
+                                   Style="{StaticResource TitleTextStyle}" />
+                        <ComboBox ItemsSource="{Binding Details, UpdateSourceTrigger=PropertyChanged}"
+                                  Style="{StaticResource ComboBoxFlatStyleBlock}"
+                                  SelectedItem="{Binding SelectedDetail}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock Text="{Binding Name}" />
+                                        - доступно
+                                        <TextBlock Text="{Binding Quantity}" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBlock Text="{DynamicResource DetailQuantityText}"
+                                   d:Text="Количество детали"
+                                   Style="{StaticResource TitleTextStyle}" />
+                        <TextBox Text="{Binding DetailQuantity, UpdateSourceTrigger=PropertyChanged}" />
+                        <Button Content="{DynamicResource TakeDetailButtonText}"
+                                d:Content="Взять деталь"
+                                Style="{StaticResource ModernOutlinedButton}"
+                                Command="{Binding GetDetail}"
+                                HorizontalAlignment="Left"
+                                Width="100" />
+                    </StackPanel>
+                    <StackPanel Width="220"
+                                Height="520">
+                        <TextBlock Text="{DynamicResource SetStatusText}"
+                                   d:Text="Установить статус"
+                                   FontSize="20"
+                                   Style="{StaticResource TitleTextStyle}" />
+                        <ComboBox ItemsSource="{Binding Statuses}"
+                                  SelectedIndex="0"
+                                  SelectedItem="{Binding NewStatus}"
+                                  Style="{StaticResource ComboBoxFlatStyleBlock}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource StatusConverter}}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBlock Text="{DynamicResource SetPriceText}"
+                                   d:Text="Установить цену (руб.)"
+                                   FontSize="20"
+                                   Style="{StaticResource TitleTextStyle}" />
+                        <TextBox Text="{Binding Cost, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                    <StackPanel Width="340"
+                                Margin="15,0,0,0">
+                        <TextBlock Text="{DynamicResource AnswerText}"
+                                   d:Text="Ответ"
+                                   FontSize="20"
+                                   Style="{StaticResource TitleTextStyle}" />
+                        <TextBox Height="130"
+                                 FontSize="12"
+                                 MaxLength="500"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 Text="{Binding Response}" />
+                        <Button Content="{DynamicResource SaveText}"
+                                d:Content="Сохранить"
+                                Command="{Binding Save}"
+                                Style="{StaticResource ModernButton}"
+                                Width="100"
+                                HorizontalAlignment="Right" />
+                    </StackPanel>
+                    <Button Content="{DynamicResource CancelRequestText}"
+                            d:Content="Отменить заявку по просьбе клиента"
+                            Style="{StaticResource ModernButton}"
+                            Height="30"
+                            Width="300"
+                            Command="{Binding CancelRequest}"
+                            HorizontalAlignment="Left"
+                            Margin="-580,-138,0,0"
+                            Visibility="{Binding CanCancelRequest, Converter={StaticResource VisibilityConverter}}"
+                            Cursor="Hand" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1"
+                Grid.Row="1"
+                d:Background="White"
+                Background="{DynamicResource back}"
+                CornerRadius="10"
+                Padding="20"
+                Margin="10">
+            <Border.Effect>
+                <DropShadowEffect Color="Gray"
+                                  BlurRadius="10"
+                                  ShadowDepth="2"
+                                  Opacity="0.3" />
+            </Border.Effect>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{DynamicResource OrderedText}"
+                           d:Text="Заказал"
+                           FontSize="20"
+                           Style="{StaticResource TitleTextStyle}" />
+                <TextBlock Text="{DynamicResource MakingText}"
+                           d:Text="Выполняет"
+                           FontSize="20"
+                           Style="{StaticResource TitleTextStyle}"
+                           Grid.Column="2" />
+                <StackPanel Grid.Row="1"
+                            Orientation="Horizontal">
+                    <Image Height="100"
+                           Width="100"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource ModernHighQualityImageStyle}"
+                           Source="{Binding UserAvatar}" />
+                    <StackPanel>
+                        <TextBlock FontSize="20"
+                                   FontWeight="Bold"
+                                   Text="{Binding UserName}"
+                                   Margin="15, 10" />
+                        <TextBlock FontSize="14"
+                                   FontWeight="Bold"
+                                   Text="{Binding UserPhone}"
+                                   Style="{StaticResource SubtitleTextStyle}"
+                                   Margin="15,0" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="1"
+                            Grid.Column="2"
+                            Orientation="Horizontal">
+                    <Button Content="{DynamicResource TakeOrderText}"
+                            d:Content="Взять заказ"
+                            Style="{StaticResource ModernButton}"
+                            Height="40"
+                            Width="100"
+                            Command="{Binding SetRequestMaster}"
+                            Visibility="{Binding CanBecameMaster, Converter={StaticResource VisibilityConverter}}" />
+                    <Image Height="100"
+                           Width="100"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource ModernHighQualityImageStyle}"
+                           Source="{Binding MasterAvatar}" />
+                    <StackPanel>
+                        <TextBlock FontSize="20"
+                                   FontWeight="Bold"
+                                   Text="{Binding MasterName}"
+                                   Margin="15, 10" />
+                        <TextBlock FontSize="14"
+                                   FontWeight="Bold"
+                                   Style="{StaticResource SubtitleTextStyle}"
+                                   Text="{Binding MasterPhone}"
+                                   Margin="15, 0" />
+
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1"
+                Grid.Row="0"
+                d:Background="White"
+                Background="{DynamicResource back}"
+                CornerRadius="10"
+                Padding="20"
+                Margin="5">
+            <Border.Effect>
+                <DropShadowEffect Color="Gray"
+                                  BlurRadius="10"
+                                  ShadowDepth="2"
+                                  Opacity="0.3" />
+            </Border.Effect>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Width="300">
+                        <TextBlock Text="{DynamicResource RequestNameText}"
+                                   d:Text="Название заявки"
+                                   FontWeight="Bold"
+                                   Margin="0,0,0,5"
+                                   Style="{StaticResource TitleTextStyle}" />
+                        <TextBlock Text="{Binding Name}"
+                                   Margin="0,0,0,10"
+                                   FontSize="14"
+                                   TextWrapping="Wrap"
+                                   Style="{StaticResource SubtitleTextStyle}" />
+                        <TextBlock Text="{DynamicResource ServiceText}"
+                                   d:Text="Услуга"
+                                   FontWeight="Bold"
+                                   Margin="0,0,0,5"
+                                   Style="{StaticResource TitleTextStyle}" />
+                        <TextBlock Text="{Binding Service}"
+                                   FontSize="14"
+                                   TextWrapping="Wrap"
+                                   Style="{StaticResource SubtitleTextStyle}" />
+                        <TextBlock Text="{DynamicResource SelectDeviceText}"
+                                   d:Text="Устройство"
+                                   FontWeight="Bold"
+                                   Margin="0,0,0,5"
+                                   Style="{StaticResource TitleTextStyle}" />
+                        <TextBlock Text="{Binding Device}"
+                                   FontSize="14"
+                                   TextWrapping="Wrap"
+                                   Style="{StaticResource SubtitleTextStyle}" />
+                        <TextBlock Text="{DynamicResource ServiceStatusText}"
+                                   d:Text="Статус"
+                                   FontWeight="Bold"
+                                   Margin="0,0,0,5"
+                                   Style="{StaticResource TitleTextStyle}" />
+                        <TextBlock Text="{Binding Status, Converter={StaticResource StatusConverter}}"
+                                   FontSize="14"
+                                   TextWrapping="Wrap"
+                                   Style="{StaticResource SubtitleTextStyle}" />
+                    </StackPanel>
+                    <StackPanel Width="520"
+                                Margin="10,0,0,0">
+                        <TextBlock Text="{DynamicResource PriceText}"
+                                   d:Text="Стоимость"
+                                   FontWeight="Bold"
+                                   Margin="0,0,0,5"
+                                   Style="{StaticResource TitleTextStyle}" />
+                        <TextBlock Style="{StaticResource SubtitleTextStyle}">
+                    <TextBlock Text="{Binding Price}"
+                               Style="{StaticResource SubtitleTextStyle}" />
+                            <TextBlock Text="{DynamicResource RubText}"
+                                       d:Text="руб." />
+                    </TextBlock>
+                        <TextBlock Text="{DynamicResource DescriptionText}"
+                                   d:Text="Описание"
+                                   FontWeight="Bold"
+                                   Style="{StaticResource TitleTextStyle}"
+                                   Margin="0,0,0,5" />
+                        <TextBlock Text="{Binding Description}"
+                                   FontSize="14"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+    </Grid>
+</UserControl>
